@@ -1,0 +1,25 @@
+[package]
+name = "scoring-engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+stylus-sdk = "0.10.0"
+alloy-primitives = "1.0.1"
+alloy-sol-types = "1.0.1"
+shared = { path = "../../shared", default-features = false }
+serde = { version = "1", default-features = false, features = ["derive", "alloc"] }
+serde-json-wasm = { version = "1", default-features = false }
+fixed = { version = "1", default-features = false }
+
+[features]
+default = ["mini-alloc"]
+export-abi = ["stylus-sdk/export-abi"]
+mini-alloc = ["stylus-sdk/mini-alloc"]
+
+[[bin]]
+name = "scoring-engine-abi"
+path = "src/main.rs"
+
+[lib]
+crate-type = ["lib", "cdylib"]

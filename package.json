@@ -1,0 +1,23 @@
+{
+  "name": "stylus-scoring-engine",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "pnpm build:contracts && pnpm build:sol",
+    "build:contracts": "cargo build --release --target wasm32-unknown-unknown --lib -p scoring-engine",
+    "build:sol": "cd contracts/scoring-engine-sol && forge build",
+    "test": "pnpm test:contracts",
+    "test:contracts": "cargo test",
+    "deploy:stylus": "pnpm --filter scoring-engine run deploy",
+    "deploy:solidity": "pnpm --filter scoring-engine-sol run deploy",
+    "deploy:all": "pnpm --filter scripts run deploy",
+    "check": "pnpm --filter scoring-engine run check",
+    "export-abi": "pnpm --filter scoring-engine run export-abi",
+    "api": "cd api && cargo run",
+    "devnode": "cd nitro-devnode && ./run-dev-node.sh",
+    "devnode:stylus": "cd nitro-devnode && ./run-dev-node.sh --stylus",
+    "fund": "pnpm --filter scripts run fund",
+    "benchmark": "pnpm --filter scripts run benchmark",
+    "clean": "rm -rf target contracts/scoring-engine-sol/out contracts/scoring-engine-sol/cache"
+  }
+}

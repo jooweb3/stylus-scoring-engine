@@ -1,0 +1,15 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .: {}
+
+  contracts/scoring-engine: {}
+
+  contracts/scoring-engine-sol: {}
+
+  scripts: {}
