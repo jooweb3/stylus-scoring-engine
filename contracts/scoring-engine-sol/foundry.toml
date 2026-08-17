@@ -6,3 +6,4 @@ solc = "0.8.23"
 via_ir = true
 optimizer = true
 optimizer_runs = 200
+remappings = ["forge-std/=lib/forge-std/src/"]

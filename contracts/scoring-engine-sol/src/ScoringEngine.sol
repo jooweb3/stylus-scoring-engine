@@ -2,6 +2,11 @@
 pragma solidity ^0.8.23;
 
 contract ScoringEngineSol {
+    error EmptyFactors();
+    error ArrayLengthMismatch();
+    error InvalidCorrelationLength();
+    error InvalidCorrelationIndex();
+
     function evaluate(
         int64[] calldata factors,
         int64[] calldata weights,
@@ -17,6 +22,15 @@ contract ScoringEngineSol {
         uint256 numRules = weights.length;
         uint256 numFactors = factors.length;
         uint256 numCorr = corrA.length;
+
+        if (numFactors == 0) revert EmptyFactors();
+        if (numRules != numFactors || thresholds.length != numFactors ||
+            directions.length != numFactors || bonuses.length != numFactors) {
+            revert ArrayLengthMismatch();
+        }
+        if (numCorr != corrB.length || corrWeights.length != numCorr) {
+            revert InvalidCorrelationLength();
+        }
 
         int256 finalScore = 0;
 
@@ -60,7 +74,9 @@ contract ScoringEngineSol {
         for (uint256 i = 0; i < numCorr; i++) {
             uint256 idxA = uint256(corrA[i]);
             uint256 idxB = uint256(corrB[i]);
-            if (idxA >= numFactors || idxB >= numFactors) continue;
+            if (idxA >= numFactors || idxB >= numFactors) {
+                revert InvalidCorrelationIndex();
+            }
 
             int256 valA = int256(factors[idxA]);
             int256 valB = int256(factors[idxB]);
